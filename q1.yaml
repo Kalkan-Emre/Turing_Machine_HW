@@ -1,0 +1,46 @@
+name: binary increment
+source code: |
+  # Adds 1 to a binary number.
+  input: '0011'
+  blank: ' '
+  start state: s
+  table:
+    s:
+      0 : {write: ' ', R: q0}
+    q0:
+      0 : {write: 0, R}
+      1 : {write: 1, R}
+      ' ': {write: ' ', L: q1}
+    q1:
+      1 : {write: ' ', L: q2}
+    q2:
+      0 : {write: 0, L}
+      1 : {write: 1, L}
+      ' ': {write: ' ', R: q3}
+    q3:
+      0 : {write: ' ', R: q0}
+      
+      ' ': {write: ' ', L: accept}
+    accept:
+
+
+  # Exercises:
+
+  # • Modify the machine to always halt on the leftmost digit
+  #   (regardless of the number's length).
+  #   Hint: add a state between carry and done.
+
+  # • Make a machine that adds 2 instead of 1.
+  #   Hint: 2 is '10' in binary, so the last digit is unaffected.
+  #   Alternative hint: chain together two copies of the machine from
+  #   the first exercise (renaming the states of the second copy).
+
+  # • Make a machine to subtract 1.
+  #   To simplify things, assume the input is always greater than 0.
+positions:
+  s: {x: 107.59, y: 247.4}
+  q0: {x: 285.87, y: 251.54}
+  q1: {x: 408.35, y: 253.18}
+  q2: {x: 548.52, y: 254.68}
+  q3: {x: 638.82, y: 395.94}
+  accept: {x: 686.03, y: 270.91}

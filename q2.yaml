@@ -1,0 +1,64 @@
+name: binary increment
+source code: |
+  # Adds 1 to a binary number.
+  input: '1011'
+  blank: ' '
+  start state: s
+  table:
+    s:
+      0 : {R: s}
+      1 : {R: s}
+      ' ' : {L: q0 }
+    q0:
+      0 : {write: b, R: q2}
+      1 : {write: a, R: q1}
+      ' ': {R: halt}
+    q1:
+      a : {write: a, R: q1}
+      b : {write: b, R: q1}
+      ' ': {write: a, L: q3}
+    q2:
+      a : {write: a, R: q2}
+      b : {write: b, R: q2}
+      ' ': {write: b, L: q4}
+    q3:
+      a : {write: a, L: q3}
+      b : {write: b, L: q3}
+      1 : {write: a, R: q1}
+      0 : {write: b, R: q2}
+      ' ': {write: ' ', R: q5}
+    q4:
+      a : {write: a, L: q4}
+      b : {write: b, L: q4}
+      1 : {write: a, R: q1}
+      0 : {write: b, R: q2}
+      ' ': {write: ' ', R: q5}
+    q5:
+      a : {write: 1, R}
+      b : {write: 0, R}
+      ' ': {write: ' ', L: halt}
+    halt:
+
+
+  # Exercises:
+
+  # • Modify the machine to always halt on the leftmost digit
+  #   (regardless of the number's length).
+  #   Hint: add a state between carry and done.
+
+  # • Make a machine that adds 2 instead of 1.
+  #   Hint: 2 is '10' in binary, so the last digit is unaffected.
+  #   Alternative hint: chain together two copies of the machine from
+  #   the first exercise (renaming the states of the second copy).
+
+  # • Make a machine to subtract 1.
+  #   To simplify things, assume the input is always greater than 0.
+positions:
+  s: {x: 107.59, y: 247.4}
+  q0: {x: 265.92, y: 255.97}
+  q1: {x: 383.85, y: 139.82}
+  q2: {x: 375.65, y: 312.3}
+  q3: {x: 547.95, y: 137.75}
+  q4: {x: 564.29, y: 316.73}
+  q5: {x: 756.41, y: 304.82}
+  halt: {x: 429.03, y: 440.29}
